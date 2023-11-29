@@ -1,3 +1,17 @@
-/* 
-    General Styles
-*/
+body{
+    background-color: black;
+}
+
+
+.titulo{
+    color: red;
+    text-align: start;
+    font-size: 40px;
+}
+footer{
+    color: white;
+}
+
+hr{
+    color: white;
+}
