@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { Context } from '../store/appContext'
 
 function CharactersDetails() {
+  const {store, actions} = useContext(Context)
   return (
     <div className='container'>
       <div className="card mb-3" style={{maxWidth: "1200px", height: "500px"}}>

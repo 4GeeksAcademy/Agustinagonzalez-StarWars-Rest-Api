@@ -1,3 +1,4 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -12,7 +13,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			characters: [],
+			charactersKey: [],
+			charactersDetails: {},
+			planets: [],
+			starships: []
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,6 +44,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			getCharacters: ()=> {
+				fetch('https://www.swapi.tech/api/people')
+				.then((response)=> {
+					if(response.ok){
+						console.log("exito")
+					}
+					return response.json()
+				})
+				.then((data)=>{
+					setStore({characters: data.results})
+				
+				})
+				.catch(err=>{console.log(err)})
+			},
+			/* getDetailsCharacters: ()=> {
+				fetch('https://www.swapi.tech/api/people')
+				.then((response)=>{
+					if(response.ok){
+						console.log('detalles traidos con exito')
+					}
+					return response.json()
+				})
+				.then((data)=>{
+					setStore({charactersDetails: data.results})
+					console.log(data.results)
+				})
+				.catch((err)=>{console.log(err)})
+			}, */
+			
+			getPlanets: ()=> {
+				fetch('https://www.swapi.tech/api/planets')
+				.then((response)=>{
+					if(response.ok) {
+						console.log('planetas traidos con exito')
+					}
+					return response.json()
+				})
+				.then((data)=>{
+					setStore({planets: data.results})
+
+				})
+				.catch((err)=>{console.log(err)})
+			},
+			getStarships: ()=>{
+				fetch('https://www.swapi.tech/api/starships')
+				.then((response)=>{
+					if(response.ok){
+						console.log('starships traidos con exito')
+					}
+					return response.json()
+				})
+				.then((data)=>{
+					setStore({starships: data.results})
+				})
+
 			}
 		}
 	};
