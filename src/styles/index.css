@@ -1,20 +1,116 @@
-body{
+@keyframes animacion {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+body {
     background-color: black;
 }
 
-
-.titulo{
-    color: red;
+.titulo {
+    color: #007BFF;
+    font-family: 'Roboto Condensed', sans-serif;
     text-align: start;
     font-size: 40px;
 }
-footer{
+
+footer {
     color: white;
 }
 
-hr{
+hr {
     color: white;
 }
-.lista{
+
+.lista {
     gap: 10px;
+}
+
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.fondo {
+    background-color: rgba(255, 255, 255, 0.089);
+}
+
+.hover:hover {
+    border: 5px solid #007BFF;
+}
+
+.card-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: rgba(51, 51, 51, 0.534);
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+/* 
+.card:hover {
+    transform: scale(1.05);
+} */
+
+.character-details {
+    color: white;
+}
+
+.contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Estilo para la imagen dentro de la tarjeta */
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Estilo para la flecha hacia abajo */
+.fa-angle-down {
+    margin-top: 20px;
+}
+
+/* .card-body{
+  gap: 20px;
+} */
+.information{
+  gap: 20px;
+  
+border-right: 1px solid white;
+text-align: center; 
+padding: 15px;
+}
+
+.information p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.img-card{
+  margin: 0 auto;
+  width: 60%;
+  max-height: 700px; 
+  object-fit: cover; 
+  border-radius: 5px;
 }

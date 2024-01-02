@@ -15,10 +15,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			characters: [],
-			charactersKey: [],
 			charactersDetails: {},
 			planets: [],
-			starships: []
+			planetsDetails: [],
+			starships: [],
+			starshipsDetails: {},
+			favorites: []
 			
 		},
 		actions: {
@@ -49,18 +51,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch('https://www.swapi.tech/api/people')
 				.then((response)=> {
 					if(response.ok){
-						console.log("exito")
+						console.log("characters traido con exito")
 					}
 					return response.json()
 				})
 				.then((data)=>{
 					setStore({characters: data.results})
-				
+					setStore({charactersKey: data.results.uid})
 				})
 				.catch(err=>{console.log(err)})
 			},
-			/* getDetailsCharacters: ()=> {
-				fetch('https://www.swapi.tech/api/people')
+			 getDetailsCharacters: (id)=> {
+				fetch(`https://www.swapi.tech/api/people/${id}`)
 				.then((response)=>{
 					if(response.ok){
 						console.log('detalles traidos con exito')
@@ -68,12 +70,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return response.json()
 				})
 				.then((data)=>{
-					setStore({charactersDetails: data.results})
-					console.log(data.results)
+					setStore({charactersDetails: data.result})
 				})
 				.catch((err)=>{console.log(err)})
-			}, */
-			
+			}, 
+	
 			getPlanets: ()=> {
 				fetch('https://www.swapi.tech/api/planets')
 				.then((response)=>{
@@ -88,6 +89,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.catch((err)=>{console.log(err)})
 			},
+			
+			getPlanetsDetails: (id)=>{
+				fetch(`https://www.swapi.tech/api/planets/${id}`)
+				.then((response)=>{
+					if(response.ok){
+					console.log('detalles traidos con exito')
+				}
+				return response.json()
+				})
+				.then((data)=>{
+					setStore({planetsDetails: data.result})
+				})
+				.catch((err)=>{console.log(err)})
+
+			},
 			getStarships: ()=>{
 				fetch('https://www.swapi.tech/api/starships')
 				.then((response)=>{
@@ -100,9 +116,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({starships: data.results})
 				})
 
+			},
+			getStarshipsDetails: (id)=>{
+				fetch(`https://www.swapi.tech/api/starships/${id}`)
+				.then((response)=>{
+					if(response.ok){
+					console.log('detalles traidos con exito')
+				}
+				return response.json()
+				})
+				.then((data)=>{
+					setStore({starshipsDetails: data.result})
+				})
+				.catch((err)=>{console.log(err)})
+			},
+			getFavorites: (name) => {
+				const { favorites } = getStore();
+			  
+				// Verificar si el characterName ya está en favoritos
+				const isFavorite = favorites.some((fav) => fav.name === name);
+			  
+				if (isFavorite) {
+					// Si es un favorito, eliminarlo de la lista
+					const updatedFavorites = favorites.filter((fav) => fav.name !== name);
+					setStore({ favorites: updatedFavorites });
+				} else {
+					// Si no es un favorito, agregarlo a la lista
+					setStore({ favorites: [...favorites, { name: name }] });
+				}
+			  }
 			}
 		}
 	};
-};
+
 
 export default getState;
